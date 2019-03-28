@@ -366,38 +366,35 @@ $ git branch -d iss53
 接着注册
 
 配置完之后，就到了SourceTree的仓库管理界面： 
-![Snip20160927_6.png-40.6kB](http://static.zybuluo.com/Sweetfish/p1n38ffvbcoj7amrhfjzzfve/Snip20160927_6.png)
 
+![image-20190328172434977](/Users/tlp/Library/Application Support/typora-user-images/image-20190328172434977.png)
 
+另外可以将你的账号与 GitHub 账号绑定，偏好设置--账户--添加--链接账号：
 
-## 4.SourceTree打开git仓库
+![image-20190328172237435](/Users/tlp/Library/Application Support/typora-user-images/image-20190328172237435.png)
 
+​	在弹出的 GItHub 页面登陆你的账号，确认绑定即可。
 
+### 3.3 SourceTree 配置git仓库
 
-### 4.1 从URL克隆
+#### 3.3.1 从URL克隆
 
-即将一个远程代码库克隆到本地： 
-![Snip20160929_3.png-47.6kB](http://static.zybuluo.com/Sweetfish/4smk8kh51p9usm7xtwth8avf/Snip20160929_3.png)
+​	即将一个远程代码库克隆到本地： 
 
-添加git仓库的URL链接，选择本地存放位置以及项目名称： 
-![Snip20160929_4.png-41.4kB](http://static.zybuluo.com/Sweetfish/atwc6w2xk1pf6ew8pmk1cdha/Snip20160929_4.png)
+![image-20190328181830524](/Users/tlp/Library/Application Support/typora-user-images/image-20190328181830524.png)
 
+添加git仓库的URL链接，选择本地存放位置以及项目名称，可以直接用 GitDemo 进行测试（地址：https://github.com/LePengTian/GitDemo.git）： 
+![image-20190328182045842](/Users/tlp/Library/Application Support/typora-user-images/image-20190328182045842.png)
 
+#### 3.3.2 打开本地代码库
 
-### 4.2 打开本地代码库
+​	直接打开本地已经存在的git仓库： 
 
-直接打开本地已经存在的git仓库： 
-![Snip20160929_8.png-37.4kB](http://static.zybuluo.com/Sweetfish/evkth7j9vab034wsdl567jgq/Snip20160929_8.png)
+![image-20190328195415679](/Users/tlp/Library/Application Support/typora-user-images/image-20190328195415679.png)
 
-选择本地仓库(项目工程)的文件夹，打开即可： 
-![Snip20160929_7.png-75.7kB](http://static.zybuluo.com/Sweetfish/h7ht11ty1cs2ijjwprki46jc/Snip20160929_7.png)
+​	选择本地仓库(项目工程)的文件夹，打开即可。
 
-双击对应的仓库就可以打开该仓库的代码管理： 
-![Snip20160927_12.png-165.8kB](http://static.zybuluo.com/Sweetfish/hlhbqtobqavwrg011tb6ni54/Snip20160927_12.png)
-
-
-
-## 5.SourceTree git界面介绍
+### 4.SourceTree git界面介绍
 
 ![Snip20160927_42.png-252.6kB](http://static.zybuluo.com/Sweetfish/1msghy4b77k6c816tfh0kkxv/Snip20160927_42.png)
 如上图，SourceTreegit支持中文界面，基本命令对比如下：
@@ -411,9 +408,7 @@ $ git branch -d iss53
 
 左边栏可以看到本地和远程的分支，还有本地文件的工作状态。
 
-
-
-## 6.代码提交
+### 5.代码提交
 
 1.勾选代码，添加(add)到暂存区域 
 ![Snip20160927_21.png-290kB](http://static.zybuluo.com/Sweetfish/mma1e7bsaen8dht3q8va05uc/Snip20160927_21.png)
@@ -440,20 +435,14 @@ $ git branch -d iss53
 即放弃该文件的修改，恢复到修改前： 
 ![Snip20160927_26.png-255.8kB](http://static.zybuluo.com/Sweetfish/1t2zdcip4p9ht1t5mpj5jjb2/Snip20160927_26.png)
 
+### 6.代码拉取和冲突解决
 
-
-## 7.代码拉取和冲突解决
-
-
-
-### 7.1 拉取代码
+#### 6.1 拉取代码
 
 点击“拉取”按钮，拉取远程仓库代码，确定拉取的远程`分支`： 
 ![Snip20160930_11.png-228.7kB](http://static.zybuluo.com/Sweetfish/n23pe5t1nkj8c6a6n6ajylei/Snip20160930_11.png)
 
-
-
-### 7.2 冲突解决
+#### 6.2 冲突解决
 
 1.冲突出现 
 如果拉取出现冲突，会弹出“合并冲突”的提醒弹窗，说明代码有冲突，需要人工合并代码。 
@@ -503,8 +492,25 @@ FileMerge默认使用远程替换本地的代码(即打开FileMerge后，代码�
 **多余的.orig文件删除：** 
 这个是由于git自身造成的，它会在解决冲突后生成一个原来冲突的备份，通过命令可以去掉
 
-
-
 ```
 git config --global mergetool.keepBackup false
 ```
+
+
+
+
+
+## 参考链接
+
+【1】[Git官方文档中文版](<https://git-scm.com/book/zh/v2>)
+
+【2】[Svn 与 Git 比较](<http://www.360doc.com/content/12/1228/20/11220452_256857021.shtml>)
+
+【3】[SourceTree官方文档](<https://confluence.atlassian.com/get-started-with-sourcetree?_ga=2.238387269.450685589.1553763967-1291292951.1553763967>)
+
+【4】[MAC上git版本管理软件SourceTree的使用](<https://www.zybuluo.com/Sweetfish/note/516129>)
+
+【5】[SVN 教程-菜鸟教程](<http://www.runoob.com/svn/svn-tutorial.html>)
+
+【6】[Git 教程-菜鸟教程](<http://www.runoob.com/git/git-tutorial.html>)
+
