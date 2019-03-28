@@ -313,7 +313,29 @@ $ git branch -d iss53
 
 ## 二、为什么要用 Git——与 Svn 的区别
 
-​	通过**第一章**我们对 Git 有了基本的了解，下表对 Svn 与 Git 进行了主要特点的对比：
+​	通过**第一章**我们对 Git 有了基本的了解，Git 与 Svn 最主要的区别是他们分别属于分布式和集中式的版本管理系统。
+
+​	集中化的版本控制系统（Centralized Version Control Systems，简称 CVCS）诸如 CVS、Subversion 以及 Perforce 等，都有一个单一的集中管理的服务器，保存所有文件的修订版本，而协同工作的人们都通过客户端连到这台服务器，取出最新的文件或者提交更新。 多年以来，这已成为版本控制系统的标准做法。
+
+​	集中式模型：
+
+![image-20190327172613717](/Users/tlp/Library/Application%20Support/typora-user-images/image-20190327172613717.png)
+
+​	这种做法带来了许多好处，每个人都可以在一定程度上看到项目中的其他人正在做些什么。 而管理员也可以轻松掌控每个开发者的权限，并且管理一个 CVCS 要远比在各个客户端上维护本地数据库来得轻松容易。
+
+​	事分两面，有好有坏。 这么做最显而易见的缺点是中央服务器的单点故障。 如果宕机一小时，那么在这一小时内，谁都无法提交更新，也就无法协同工作。 如果中心数据库所在的磁盘发生损坏，又没有做恰当备份，毫无疑问你将丢失所有数据——包括项目的整个变更历史，只剩下人们在各自机器上保留的单独快照。 
+
+​	分布式版本控制系统（Distributed Version Control System，简称 DVCS）像 Git、Mercurial、Bazaar 以及 Darcs 等，客户端并不只提取最新版本的文件快照，而是把代码仓库完整地镜像下来。 这么一来，任何一处协同工作用的服务器发生故障，事后都可以用任何一个镜像出来的本地仓库恢复。 因为每一次的克隆操作，实际上都是一次对代码仓库的完整备份。
+
+分布式模型：
+
+
+
+![image-20190327172627016](/Users/tlp/Library/Application%20Support/typora-user-images/image-20190327172627016.png)
+
+​	更进一步，许多这类系统都可以指定和若干不同的远端代码仓库进行交互。籍此，你就可以在同一个项目中，分别和不同工作小组的人相互协作。 你可以根据需要设定不同的协作流程，比如层次模型式的工作流，而这在以前的集中式系统中是无法实现的。
+
+​	下表对 Svn 与 Git 进行了主要特点的对比：
 
 |                  | 集中式（SVN）                                                | 分布式（Git）                                                |
 | :--------------: | ------------------------------------------------------------ | ------------------------------------------------------------ |
@@ -322,18 +344,167 @@ $ git branch -d iss53
 |   文件存储格式   | 按照原始文件存储，体积较大                                   | 按照元数据方式存储，体积很小                                 |
 |   是否有版本号   | 有连续的版本号                                               | 没有，有通过文件计算的哈希值作为版本代号                     |
 |  分支操作的影响  | 合并分支的开销比较大，创建新的分支则所有的人都会拥有和你一样的分支 | 分支的使用非常简单，分支操作不会影响其他开发人员             |
-|       提交       | 提交的文件会直接记录到中央版本库                             | 提交是本地操作，需要执行push操作才会提交到主要版本库         |
+|       提交       | 提交的文件会直接记录到中央版本库                             | 提交是本地操作，意味着更快的速度，需要执行push操作才会提交到主要版本库 |
 |       检出       | 可以将整个库检出到工作区，也可以将某个目录检出到工作区       | Git 没有部分检出，但是可以通过子模块处理这个问题             |
 |       权限       | 通过对文件目录授权来实现权限管理，子目录默认继承父目录的权限。但是权限不能在分支中继承，不能对单个文件授权。 | Git的授权模型只能实现非零即壹式的授权，要么拥有全部的写权限，要么没有写权限，要么拥有整个版本库的读权限，要么禁用 |
 |     学习成本     | 相对容易，符合一般人的思维习惯                               | 学习周期相对比较长，学会用命令操作 Git 需要一定的熟练度      |
 
-​	集中式模型：
+## 三、如何使用 Git——SourceTree
 
-![image-20190327172613717](/Users/tlp/Library/Application Support/typora-user-images/image-20190327172613717.png)
+​	Git 对命令操作有非常友好的支持，建议有时间的同学尽可能学习使用命令去操作 Git（[Git 命令列表](<https://git-scm.com/book/zh/v2/%E9%99%84%E5%BD%95-C%3A-Git-%E5%91%BD%E4%BB%A4-%E8%AE%BE%E7%BD%AE%E4%B8%8E%E9%85%8D%E7%BD%AE>)）。不想使用命令的同学也没关系，本章将借用一个 demo 为大家介绍 Mac 上的可视化 Git 应用程序 SourceTree 的使用方法。
 
-分布式模型：
+### 3.1 SourceTree简介
+
+​	SourceTree是一款基于界面的git版本控制软件，支持add、commit、clone、push、pull 和merge等操作，操作也比较简单。 
+![image-20190328170935145](/Users/tlp/Library/Application Support/typora-user-images/image-20190328170935145.png)
+
+### 3.2 SourceTree的安装与注册
+
+​	首先去官网[(链接)](https://www.sourcetreeapp.com/)下载最新版SourceTree，也可以直接使用附件中的安装包: 
+![image-20190328170606671](/Users/tlp/Library/Application Support/typora-user-images/image-20190328170606671.png)
+
+接着注册
+
+配置完之后，就到了SourceTree的仓库管理界面： 
+![Snip20160927_6.png-40.6kB](http://static.zybuluo.com/Sweetfish/p1n38ffvbcoj7amrhfjzzfve/Snip20160927_6.png)
 
 
 
-![image-20190327172627016](/Users/tlp/Library/Application Support/typora-user-images/image-20190327172627016.png)
+## 4.SourceTree打开git仓库
 
+
+
+### 4.1 从URL克隆
+
+即将一个远程代码库克隆到本地： 
+![Snip20160929_3.png-47.6kB](http://static.zybuluo.com/Sweetfish/4smk8kh51p9usm7xtwth8avf/Snip20160929_3.png)
+
+添加git仓库的URL链接，选择本地存放位置以及项目名称： 
+![Snip20160929_4.png-41.4kB](http://static.zybuluo.com/Sweetfish/atwc6w2xk1pf6ew8pmk1cdha/Snip20160929_4.png)
+
+
+
+### 4.2 打开本地代码库
+
+直接打开本地已经存在的git仓库： 
+![Snip20160929_8.png-37.4kB](http://static.zybuluo.com/Sweetfish/evkth7j9vab034wsdl567jgq/Snip20160929_8.png)
+
+选择本地仓库(项目工程)的文件夹，打开即可： 
+![Snip20160929_7.png-75.7kB](http://static.zybuluo.com/Sweetfish/h7ht11ty1cs2ijjwprki46jc/Snip20160929_7.png)
+
+双击对应的仓库就可以打开该仓库的代码管理： 
+![Snip20160927_12.png-165.8kB](http://static.zybuluo.com/Sweetfish/hlhbqtobqavwrg011tb6ni54/Snip20160927_12.png)
+
+
+
+## 5.SourceTree git界面介绍
+
+![Snip20160927_42.png-252.6kB](http://static.zybuluo.com/Sweetfish/1msghy4b77k6c816tfh0kkxv/Snip20160927_42.png)
+如上图，SourceTreegit支持中文界面，基本命令对比如下：
+
+- 提交：git commit
+- 拉取：git pull
+- 推送：git push
+- 抓取：git fetch
+
+主界面中还有一个`未暂存文件`和`已暂存文件`，勾选`未暂存文件`会自动将`未暂存文件`添加到`已暂存文件`区域，就是一次`git add`命令。
+
+左边栏可以看到本地和远程的分支，还有本地文件的工作状态。
+
+
+
+## 6.代码提交
+
+1.勾选代码，添加(add)到暂存区域 
+![Snip20160927_21.png-290kB](http://static.zybuluo.com/Sweetfish/mma1e7bsaen8dht3q8va05uc/Snip20160927_21.png)
+
+代码查看： 
+![Snip20160927_20.png-277.9kB](http://static.zybuluo.com/Sweetfish/81y289wocsrtx7lkh3d4674m/Snip20160927_20.png)
+
+2.提交(commit)代码到本地仓库
+
+- 点击左上提交按钮
+- 写提交日志
+- 点击右下提交按钮
+- 之后再点击“推送”按钮推送到远程
+
+![Snip20160927_24.png-283.7kB](http://static.zybuluo.com/Sweetfish/yyxi60bcz7pvjszv4bsqtb8j/Snip20160927_24.png)
+![Snip20160927_15.png-128.4kB](http://static.zybuluo.com/Sweetfish/0ljnbqrfmw99f1994hwx1tdl/Snip20160927_15.png)
+![Snip20160930_9.png-125.5kB](http://static.zybuluo.com/Sweetfish/4c4ue71n74wupc6581i9v9cf/Snip20160930_9.png)
+
+3.撤销添加 
+即从暂存区到未暂存区，直接取消文件勾选即可： 
+![Snip20160927_22.png-150.6kB](http://static.zybuluo.com/Sweetfish/6vk3pf1ntuen5xsq2s3ww917/Snip20160927_22.png)
+
+4.放弃修改 
+即放弃该文件的修改，恢复到修改前： 
+![Snip20160927_26.png-255.8kB](http://static.zybuluo.com/Sweetfish/1t2zdcip4p9ht1t5mpj5jjb2/Snip20160927_26.png)
+
+
+
+## 7.代码拉取和冲突解决
+
+
+
+### 7.1 拉取代码
+
+点击“拉取”按钮，拉取远程仓库代码，确定拉取的远程`分支`： 
+![Snip20160930_11.png-228.7kB](http://static.zybuluo.com/Sweetfish/n23pe5t1nkj8c6a6n6ajylei/Snip20160930_11.png)
+
+
+
+### 7.2 冲突解决
+
+1.冲突出现 
+如果拉取出现冲突，会弹出“合并冲突”的提醒弹窗，说明代码有冲突，需要人工合并代码。 
+![Snip20160927_29.png-271.9kB](http://static.zybuluo.com/Sweetfish/mw0qda5orkryq0jaiou8179f/Snip20160927_29.png)
+
+冲突文件的标记前面会出现"`感叹号❗`️"冲突标记： 
+![Snip20160927_30.png-294.3kB](http://static.zybuluo.com/Sweetfish/udw61m1vhm36rfvrhe5iup4p/Snip20160927_30.png)
+
+2.合并冲突 
+`右键点击文件-->解决冲突-->启动外部合并工具`，会调用FileMerge工具对代码进行合并。(**此外也可以在Xcode或其他第三方工具如Beyond Compare中手动修改后保存**) 
+![Snip20160927_32.png-314kB](http://static.zybuluo.com/Sweetfish/iwqket06ijas4ba77maa0wxy/Snip20160927_32.png)
+
+FileMerge默认使用远程替换本地的代码(即打开FileMerge后，代码默认已经被它合并了，但还需要人工观察合并是否正确)：
+
+- FileMerge中用`箭头→`指向的代码替换原代码，作为最新代码；
+- `红色`的箭头表明是冲突代码；
+- 最下面的区域显示的是最后合并的代码效果；
+
+![Snip20160927_36.png-309.6kB](http://static.zybuluo.com/Sweetfish/oyy47bib8yivobaek574wyo8/Snip20160927_36.png)
+![Snip20160927_33.png-298.6kB](http://static.zybuluo.com/Sweetfish/4b2zl6458iq86am9ekoijqg9/Snip20160927_33.png)
+
+手动修改方式：
+
+- 选中箭头
+
+- 在右下角选择操作方式
+
+   
+
+  - Choose left：选择左边的代码
+  - Choose right：选择右边的代码
+  - Choose both(left first)：全部选择左边的代码
+  - Choose both(right first)：全部选择右边的代码
+  - Choose neither：都不选，保留冲突前的代码
+
+- 合并完成之后，点击软件`File菜单-->save merge`保存合并代码。
+
+![Snip20160927_35.png-213.9kB](http://static.zybuluo.com/Sweetfish/25xyjnomw6g7po9xphm81i8u/Snip20160927_35.png)
+![Snip20160927_37.png-95.5kB](http://static.zybuluo.com/Sweetfish/c66es0wxzz0sa3b7r9k7yqta/Snip20160927_37.png)
+
+提交冲突文件就和`代码提交`一样了。 
+![Snip20160927_38.png-278.7kB](http://static.zybuluo.com/Sweetfish/4ur8ibzo7gwv0wyocv9tb7bk/Snip20160927_38.png)
+
+此外，代码冲突会产生一些`备份文件`需要**手动删除**，或者不勾选提交。可以通过git命令不产生备份文件 
+![Snip20160927_39.png-262.2kB](http://static.zybuluo.com/Sweetfish/d0ghdph1am5mg0gty2ku8b5h/Snip20160927_39.png)
+
+**多余的.orig文件删除：** 
+这个是由于git自身造成的，它会在解决冲突后生成一个原来冲突的备份，通过命令可以去掉
+
+
+
+```
+git config --global mergetool.keepBackup false
+```
