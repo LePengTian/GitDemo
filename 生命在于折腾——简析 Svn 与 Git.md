@@ -448,6 +448,8 @@ $ git branch -d iss53
 点击“拉取”按钮，拉取远程仓库代码，确定拉取的远程`分支`： 
 ![Snip20160930_11.png-228.7kB](http://static.zybuluo.com/Sweetfish/n23pe5t1nkj8c6a6n6ajylei/Snip20160930_11.png)
 
+SourceTree 有自动检查远程分支更新的功能，当远程分支有更新提交时，SourceTree 会提示。
+
 #### 6.2 冲突解决
 
 1.冲突出现 
